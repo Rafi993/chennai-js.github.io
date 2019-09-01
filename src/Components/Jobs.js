@@ -4,12 +4,10 @@ import React, { useEffect, useCallback } from "react";
 import { getFilteredJobs } from "src/reducers/jobs";
 import { getJobs, filterJobs } from "src/actions/jobs";
 
-const Jobs = ({ error, list, filter, _getJobs, _filterJobs, location }) => {
+const Jobs = ({ list, error, filter, _getJobs, _filterJobs }) => {
   useEffect(() => {
-    const { search } = location;
     _getJobs();
-    _filterJobs({ search });
-  }, [_getJobs, _filterJobs, location]);
+  }, [_getJobs, _filterJobs]);
 
   const handleSearch = useCallback(
     e => {
