@@ -8,6 +8,7 @@ import {
   take
 } from "redux-saga/effects";
 
+import * as api from "src/api/jobs";
 import * as atypes from "src/constants/actionTypes";
 
 function* getJobs() {
