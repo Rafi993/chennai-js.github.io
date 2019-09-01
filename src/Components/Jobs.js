@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React, { useEffect, useCallback } from "react";
 
+import { getFilteredJobs } from "src/reducers/jobs";
 import { getJobs, filterJobs } from "src/actions/jobs";
 
 const Jobs = ({ error, list, filter, _getJobs, _filterJobs, location }) => {
@@ -33,6 +34,38 @@ const Jobs = ({ error, list, filter, _getJobs, _filterJobs, location }) => {
       <div className="job-listing">
         {error !== "" ? <h3>{error}</h3> : null}
       </div>
+      <div className="job-listing">
+        {error !== "" ? <h3>{error}</h3> : null}
+        {list.map(j => (
+          <div className="job-card" key={j.id}>
+            <h3>
+              <a href={j.link} target="_blank">
+                {j.company}
+              </a>
+            </h3>
+            <div>
+              <div>
+                <strong>{j.title}</strong>
+                <span>{j.experience}</span>
+              </div>
+              <div>{j.detail}</div>
+              <div>{j.description}</div>
+              <div>
+                <strong>Location</strong>
+                <span>{j.location}</span>
+              </div>
+              <div>
+                <strong>Contact</strong>
+                <a href={`mailto:${j.contact}`}>{j.contact}</a>
+              </div>
+              <div>
+                <strong>Posted At</strong>
+                <span>{j.date}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -40,7 +73,7 @@ const Jobs = ({ error, list, filter, _getJobs, _filterJobs, location }) => {
 const mapStateToProps = ({ jobs }) => ({
   error: jobs.error,
   filter: jobs.filter,
-  list: jobs.list
+  list: getFilteredJobs(jobs)
 });
 
 export default connect(

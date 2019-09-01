@@ -1,5 +1,6 @@
 import * as atypes from "src/constants/actionTypes";
 import { combineReducers } from "redux";
+import { createSelector } from "reselect";
 
 const list = (state = [], { type, payload }) => {
   switch (type) {
@@ -46,3 +47,17 @@ export default combineReducers({
   error,
   filter
 });
+
+export const getFilteredJobs = createSelector(
+  [state => state.list, state => state.filter],
+  (list, filter) => {
+    const search = (filter.search || "").toLowerCase();
+    return list.filter(
+      j =>
+        j.title.toLowerCase().includes(search) ||
+        j.location.toLowerCase().includes(search) ||
+        j.detail.toLowerCase().includes(search) ||
+        j.company.toLowerCase().includes(search)
+    );
+  }
+);
