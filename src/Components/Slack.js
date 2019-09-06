@@ -23,9 +23,13 @@ const Slack = ({ error, msg, _joinSlack }) => {
     [setEmail]
   );
 
-  const handleJoin = useCallback(() => {
-    _joinSlack({ name, email });
-  }, [email, name]);
+  const handleJoin = useCallback(
+    e => {
+      e.preventDefault();
+      _joinSlack({ name, email });
+    },
+    [email, name]
+  );
 
   return (
     <div className="slack">
@@ -69,9 +73,9 @@ const Slack = ({ error, msg, _joinSlack }) => {
   );
 };
 
-const mapStateToProps = () => ({
-  msg: app.slak.msg,
-  error: app.slack.error
+const mapStateToProps = ({ slack }) => ({
+  msg: slack.msg,
+  error: slack.error
 });
 
 export default connect(

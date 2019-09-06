@@ -7,7 +7,8 @@ import slack from "./slack";
 const createRootReducer = history =>
   combineReducers({
     router: connectRouter(history),
-    jobs
+    jobs,
+    slack
   });
 
 export default createRootReducer;

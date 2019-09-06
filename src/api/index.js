@@ -8,7 +8,7 @@ export const getJobs = async () => {
 
 export const requestSlackAccess = async ({ name, email }) => {
   const text = `${name} (${email}) would like to join our Slack. Can you please send an invite?`;
-  await fetch(
+  const response = await fetch(
     "https://hooks.slack.com/services/T412S9JCV/BAVFN0LGL/8XG76nQ5nIjDkFdtlLI4kXs",
     {
       method: "POST",
