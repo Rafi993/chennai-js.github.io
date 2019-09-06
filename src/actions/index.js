@@ -11,3 +11,8 @@ export const filterJobs = query => ({
     query
   }
 });
+
+export const joinSlack = userDetails => ({
+  type: atypes.JOIN_SLACK_REQUEST,
+  payload: userDetails
+});

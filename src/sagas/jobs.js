@@ -1,14 +1,6 @@
-import {
-  takeEvery,
-  call,
-  put,
-  select,
-  retry,
-  all,
-  take
-} from "redux-saga/effects";
+import { takeEvery, call, put } from "redux-saga/effects";
 
-import * as api from "src/api/jobs";
+import * as api from "src/api";
 import * as atypes from "src/constants/actionTypes";
 
 function* getJobs() {

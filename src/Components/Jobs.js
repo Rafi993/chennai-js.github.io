@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useCallback } from "react";
 
 import { getFilteredJobs } from "src/reducers/jobs";
-import { getJobs, filterJobs } from "src/actions/jobs";
+import { getJobs, filterJobs } from "src/actions";
 
 const Jobs = ({
   list,
