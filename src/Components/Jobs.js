@@ -4,17 +4,35 @@ import React, { useEffect, useCallback } from "react";
 import { getFilteredJobs } from "src/reducers/jobs";
 import { getJobs, filterJobs } from "src/actions/jobs";
 
-const Jobs = ({ list, error, filter, _getJobs, _filterJobs }) => {
+const Jobs = ({
+  list,
+  error,
+  filter,
+  location,
+  history,
+  _getJobs,
+  _filterJobs
+}) => {
   useEffect(() => {
     _getJobs();
   }, [_getJobs, _filterJobs]);
+
+  useEffect(() => {
+    const { search } = location;
+    const params = new URLSearchParams(search);
+    _filterJobs({ search: params.get("text") });
+  }, [location, _filterJobs]);
 
   const handleSearch = useCallback(
     e => {
       const { value } = e.target;
       _filterJobs({ search: value });
+      history.push({
+        pathname: "/jobs",
+        search: "?" + new URLSearchParams({ text: value }).toString()
+      });
     },
-    [_filterJobs]
+    [history, _filterJobs]
   );
 
   const { search } = filter;
